@@ -20,11 +20,9 @@ typedef struct {
 ListEnds list_create_ends();
 
 NodeT* list_create_node(void* some_element);
+NodeT* list_find_note(ListEnds* list_ends, int index);
 
-int list_insert_node(ListEnds* list_ends, NodeT* node);
-
-void list_remove_node(NodeT* note, ListEnds* list_ends);
-
-NodeT* list_find_note(int index, ListEnds* list_ends);
+void list_insert_node(ListEnds* list_ends, NodeT* node);
+void list_remove_node(ListEnds* list_ends, NodeT* node);
 
 #endif
