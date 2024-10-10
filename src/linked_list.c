@@ -11,14 +11,24 @@ ListEnds list_create_ends()
     return list_ends;
 }
 
-NodeT* list_create_node(void* some_element)
+NodeT* list_create_node(NodeType type_t, void* some_element)
 {
+    if (sizeof(some_element) != type_t) {
+        printf("Error: type given is diferent from the element's size!\n");
+        return NULL;
+    }
+
     NodeT* result = malloc(sizeof(NodeT));
     result->node = some_element;
+    result->type = type_t;
     result->next = NULL;
     result->prev = NULL;
+
     return result;
 }
+
+//TODO: IMPLEMENT list_find_note
+NodeT* list_find_note(ListEnds* list_ends, int index);
 
 void list_insert_node(ListEnds* list_ends, NodeT* node)
 {
@@ -34,8 +44,6 @@ void list_insert_node(ListEnds* list_ends, NodeT* node)
 
 void list_remove_node(ListEnds* list_ends, NodeT* node)
 {
-    // if the node is at the tail set the tail to previous node
-    // if the tail is NULL then set the next pointer to NULL
     if (list_ends->end == node) {
         list_ends->end = node->prev;
 
@@ -43,8 +51,6 @@ void list_remove_node(ListEnds* list_ends, NodeT* node)
             list_ends->end->next = NULL;
     }
 
-    // if the node is the hrad then set head to the next node
-    // if the head is not empty then set prev to NULL
     if (list_ends->head == node) {
         list_ends->head = node->next;
 
@@ -63,3 +69,8 @@ void list_remove_node(ListEnds* list_ends, NodeT* node)
     node->prev = NULL;
     free(node);
 }
+
+//TODO: IMPLEMENT list_print_node
+void list_print_node(NodeT* node);
+//TODO: IMPLEMENT list_print
+void list_print(ListEnds* list_ends);

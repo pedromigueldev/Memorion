@@ -1,12 +1,12 @@
-#include "criterion/criterion.h"
+#include <criterion/criterion.h>
 #include "../src/linked_list.h"
-#include <criterion/internal/assert.h>
-#include <criterion/internal/test.h>
+#include <stdio.h>
 #include <string.h>
 
 ListEnds list_ends;
 
 void list_setup() {
+    printf("\033[33mSetting up heads and tails\033[0m\n");
     list_ends = list_create_ends();
 }
 
@@ -21,16 +21,16 @@ Test(list_test, create_ends){
 }
 
 Test(list_test, create_node){
-    NodeT* some_node = list_create_node("teste");
+    NodeT* some_node = list_create_node(L_STRING_T, "teste");
 
-    cr_expect(some_node != NULL);
+    cr_expect(some_node != NULL, "The creation errord due to type checking error.");
     cr_expect(some_node->node != NULL, "The element should be added");
 
     free(some_node);
 }
 
 Test(list_test, insert_node) {
-    NodeT* some_node = list_create_node("teste");
+    NodeT* some_node = list_create_node(L_STRING_T, "teste");
     list_insert_node(&list_ends, some_node);
 
     cr_expect(list_ends.head == some_node, "The new head should be the we're adding.");
@@ -41,9 +41,9 @@ Test(list_test, insert_node) {
 }
 
 Test(list_test, remove_node) {
-    NodeT* some_node = list_create_node("teste");
-    NodeT* some_node_2 = list_create_node("teste_2");
-    NodeT* some_node_3 = list_create_node("teste_3");
+    NodeT* some_node = list_create_node(L_STRING_T, "teste");
+    NodeT* some_node_2 = list_create_node(L_STRING_T, "teste_2");
+    NodeT* some_node_3 = list_create_node(L_STRING_T, "teste_3");
 
     list_insert_node(&list_ends, some_node);
     list_insert_node(&list_ends, some_node_2);
