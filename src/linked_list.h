@@ -27,7 +27,7 @@ typedef struct {
 ListEnds list_create_ends();
 
 NodeT* list_create_node(NodeType type_t, void* some_element);
-NodeT* list_find_note(ListEnds* list_ends, int index);
+NodeT* list_find_node(ListEnds* list_ends, int index);
 
 void list_insert_node(ListEnds* list_ends, NodeT* node);
 void list_remove_node(ListEnds* list_ends, NodeT* node);

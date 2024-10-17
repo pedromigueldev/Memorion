@@ -28,7 +28,25 @@ NodeT* list_create_node(NodeType type_t, void* some_element)
 }
 
 //TODO: IMPLEMENT list_find_note
-NodeT* list_find_note(ListEnds* list_ends, int index);
+NodeT* list_find_node(ListEnds* list_ends, int index)
+{
+    NodeT* nodes = list_ends->end;
+    NodeT* temp = nodes;
+
+    if (index == 0) return list_ends->head;
+
+    for (int i = 1; i < index; i++) {
+        printf("index: %d - %s\n", i, (char*)temp->node);
+
+        if (temp->prev) {
+            temp = temp->prev;
+        } else {
+            printf("out of bounds: %d\n", index);
+            return list_ends->head;
+        };
+    };
+    return temp;
+}
 
 void list_insert_node(ListEnds* list_ends, NodeT* node)
 {
