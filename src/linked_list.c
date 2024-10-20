@@ -13,10 +13,6 @@ ListEnds list_create_ends()
 
 NodeT* list_create_node(NodeType type_t, void* some_element)
 {
-    if (sizeof(some_element) != type_t) {
-        printf("Error: type given is diferent from the element's size!\n");
-        return NULL;
-    }
 
     NodeT* result = malloc(sizeof(NodeT));
     result->node = some_element;
@@ -27,23 +23,21 @@ NodeT* list_create_node(NodeType type_t, void* some_element)
     return result;
 }
 
-//TODO: IMPLEMENT list_find_note
 NodeT* list_find_node(ListEnds* list_ends, int index)
 {
+    if (list_ends->end == NULL || list_ends->head == NULL) {
+        printf("\x1B[31mHead and tail are null\x1B[0m\n");
+        return list_ends->head;
+    }
+
     NodeT* nodes = list_ends->end;
     NodeT* temp = nodes;
 
     if (index == 0) return list_ends->head;
 
     for (int i = 1; i < index; i++) {
-        printf("index: %d - %s\n", i, (char*)temp->node);
-
-        if (temp->prev) {
-            temp = temp->prev;
-        } else {
-            printf("out of bounds: %d\n", index);
-            return list_ends->head;
-        };
+        if (!temp->prev) return list_ends->head;
+        temp = temp->prev;
     };
     return temp;
 }
@@ -88,7 +82,18 @@ void list_remove_node(ListEnds* list_ends, NodeT* node)
     free(node);
 }
 
-//TODO: IMPLEMENT list_print_node
-void list_print_node(NodeT* node);
+void list_print_node(NodeT* node) {
+    switch (node->type) {
+            case L_STRING_T:
+                printf("%s", (char*)node->node);
+                break;
+            case L_INT_T:
+                printf("%d", *(int*)node->node);
+                break;
+            case L_FLOAT_T:
+                printf("%f", *(float*)node->node);
+            break;
+    }
+}
 //TODO: IMPLEMENT list_print
 void list_print(ListEnds* list_ends);

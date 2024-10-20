@@ -5,10 +5,11 @@
 #include "stdio.h"
 
 typedef enum {
-    L_STRING_T = sizeof(char*),
-    L_INT_T = sizeof(int),
-    L_FLOAT_T = sizeof(float)
+    L_STRING_T,
+    L_INT_T,
+    L_FLOAT_T
 } NodeType;
+
 
 struct NodeT {
     int index;

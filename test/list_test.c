@@ -1,5 +1,7 @@
 #include <criterion/criterion.h>
 #include "../src/linked_list.h"
+#include <criterion/internal/assert.h>
+#include <criterion/internal/deprecation.h>
 #include <criterion/internal/test.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -93,4 +95,36 @@ Test(list_test, find_node_out_of_bounds) {
     list_remove_node(&list_ends, some_node);
     list_remove_node(&list_ends, some_node_2);
     list_remove_node(&list_ends, some_node_3);
+}
+
+Test(list_test, find_node_list_empty) {
+    NodeT* some_node = list_create_node(L_STRING_T, "teste");
+    NodeT* some_node_2 = list_create_node(L_STRING_T, "teste_2");
+    NodeT* some_node_3 = list_create_node(L_STRING_T, "teste_3");
+
+    NodeT* node = list_find_node(&list_ends, 5);
+
+    cr_expect(node == list_ends.head, "It should return head.");
+    cr_expect(node == NULL);
+
+    free(some_node);
+    free(some_node_2);
+    free(some_node_3);
+    free(node);
+}
+
+Test(list_test, list_print_node) {
+    int num = 21;
+    float flo = 123.12;
+    NodeT* some_node = list_create_node(L_FLOAT_T, &flo);
+    NodeT* some_node_2 = list_create_node(L_INT_T, &num);
+    NodeT* some_node_3 = list_create_node(L_STRING_T, "teste_3");
+
+    list_insert_node(&list_ends, some_node);
+    list_insert_node(&list_ends, some_node_2);
+    list_insert_node(&list_ends, some_node_3);
+
+    NodeT* found_node = list_find_node(&list_ends, 1);
+
+    list_print_node(found_node);
 }
