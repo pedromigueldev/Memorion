@@ -126,5 +126,6 @@ Test(list_test, list_print_node) {
 
     NodeT* found_node = list_find_node(&list_ends, 1);
 
-    list_print_node(found_node);
+    list_print(&list_ends, HEAD);
+    list_print(&list_ends, TAIL);
 }

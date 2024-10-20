@@ -5,11 +5,15 @@
 #include "stdio.h"
 
 typedef enum {
+    HEAD,
+    TAIL
+} ListDirection ;
+
+typedef enum {
     L_STRING_T,
     L_INT_T,
     L_FLOAT_T
 } NodeType;
-
 
 struct NodeT {
     int index;
@@ -33,6 +37,6 @@ NodeT* list_find_node(ListEnds* list_ends, int index);
 void list_insert_node(ListEnds* list_ends, NodeT* node);
 void list_remove_node(ListEnds* list_ends, NodeT* node);
 void list_print_node(NodeT* node);
-void list_print(ListEnds* list_ends);
+void list_print(ListEnds* list_ends, ListDirection direction);
 
 #endif

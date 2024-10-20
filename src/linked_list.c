@@ -96,4 +96,30 @@ void list_print_node(NodeT* node) {
     }
 }
 //TODO: IMPLEMENT list_print
-void list_print(ListEnds* list_ends);
+void list_print(ListEnds* list_ends, ListDirection direction) {
+    if (list_ends->end == NULL || list_ends->head == NULL) {
+        printf("\x1B[31mList is empty\x1B[0m\n");
+        return;
+    }
+    // printf("\n");
+    if (direction == 0) {
+        NodeT* temp = list_ends->head;
+        for (int i = 0;;i++) {
+            printf("index %d: ", i);
+            list_print_node(temp);
+            if (!temp->next) { printf("\n"); return; }
+            printf("; ");
+            temp = temp->next;
+        };
+    } else {
+        NodeT* temp = list_ends->end;
+        for (int i = 0;;i++) {
+            printf("index %d: ", i);
+            list_print_node(temp);
+            if (!temp->prev) { printf("\n"); return; }
+            printf("; ");
+            temp = temp->prev;
+        };
+    }
+    return;
+};
