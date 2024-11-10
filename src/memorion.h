@@ -3,7 +3,6 @@
 #define MEMORION_H
 
 #include "stdio.h"
-
-int printing();
+#include "linked_list.h"
 
 #endif
